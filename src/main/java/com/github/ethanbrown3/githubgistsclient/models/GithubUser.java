@@ -2,15 +2,17 @@ package com.github.ethanbrown3.githubgistsclient.models;
 
 public class GithubUser {
     private String login;
-    private int public_repos;
+    private Integer public_repos;
     private String bio;
     private String company;
+    private String location;
 
-    public GithubUser(String login, int publicRepos, String bio, String company) {
+    public GithubUser(String login, int publicRepos, String bio, String company, String location) {
         this.login = login;
         this.public_repos = publicRepos;
         this.bio = bio;
         this.company = company;
+        this.location = company;
     }
 
     public String getLogin() {
@@ -21,7 +23,7 @@ public class GithubUser {
         this.login = login;
     }
 
-    public int getPublicRepos() {
+    public Integer getPublicRepos() {
         return public_repos;
     }
 
@@ -45,6 +47,13 @@ public class GithubUser {
         this.company = company;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
     @Override
     public String toString() {
         return "GithubUser{\n" +
@@ -52,6 +61,7 @@ public class GithubUser {
                 ",\npublic_repos=" + public_repos +
                 ",\nbio='" + bio + '\'' +
                 ",\ncompany='" + company + '\'' +
+                ",\nlocation='" + location +'\'' +
                 '}';
     }
 }

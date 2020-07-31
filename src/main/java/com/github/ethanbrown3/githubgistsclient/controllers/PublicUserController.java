@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -17,7 +18,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class PublicUserController implements Initializable {
     private String githubApiKey = System.getenv("GITHUB_API_KEY");
     private HttpClient client;
     private String baseUrl = "https://api.github.com";
@@ -25,9 +26,17 @@ public class Controller implements Initializable {
     @FXML
     private Button submitButton;
     @FXML
-    private TextArea outputArea;
-    @FXML
     private TextField userField;
+    @FXML
+    private Label usernameLabel;
+    @FXML
+    private Label bioLabel;
+    @FXML
+    private Label companyLabel;
+    @FXML
+    private Label repoCountLabel;
+    @FXML
+    private Label locationLabel;
 
     @FXML
     void handleSubmit(ActionEvent event) {
@@ -53,12 +62,30 @@ public class Controller implements Initializable {
         int statusCode = response.statusCode();
         if (statusCode == 200) {
             GithubUser user = gson.fromJson(response.body(), GithubUser.class);
-            outputArea.setText(response.toString() + "\n" + user.toString());
+            System.out.println(response.toString() + "\n" + user.toString());
+            displayUserData(user);
         } else if (statusCode == 404) {
-            outputArea.setText("User not found");
+            clearUserData();
+            usernameLabel.setText("User not found");
+            System.out.println("User not found");
         }
     }
 
+    void displayUserData(GithubUser user) {
+        usernameLabel.setText(user.getLogin());
+        bioLabel.setText(user.getBio());
+        companyLabel.setText(user.getCompany());
+        locationLabel.setText(user.getLocation());
+        repoCountLabel.setText(user.getPublicRepos().toString());
+    }
+
+    void clearUserData() {
+        usernameLabel.setText("");
+        bioLabel.setText("");
+        companyLabel.setText("");
+        locationLabel.setText("");
+        repoCountLabel.setText("");
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         client = HttpClient.newHttpClient();
