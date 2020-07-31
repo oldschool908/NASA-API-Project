@@ -2,13 +2,13 @@ package com.github.ethanbrown3.githubgistsclient.models;
 
 public class GithubUser {
     private String login;
-    private int publicRepos;
+    private int public_repos;
     private String bio;
     private String company;
 
     public GithubUser(String login, int publicRepos, String bio, String company) {
         this.login = login;
-        this.publicRepos = publicRepos;
+        this.public_repos = publicRepos;
         this.bio = bio;
         this.company = company;
     }
@@ -22,11 +22,11 @@ public class GithubUser {
     }
 
     public int getPublicRepos() {
-        return publicRepos;
+        return public_repos;
     }
 
     public void setPublicRepos(int publicRepos) {
-        this.publicRepos = publicRepos;
+        this.public_repos = publicRepos;
     }
 
     public String getBio() {
@@ -49,7 +49,7 @@ public class GithubUser {
     public String toString() {
         return "GithubUser{\n" +
                 "login='" + login + '\'' +
-                ",\npublicRepos=" + publicRepos +
+                ",\npublic_repos=" + public_repos +
                 ",\nbio='" + bio + '\'' +
                 ",\ncompany='" + company + '\'' +
                 '}';

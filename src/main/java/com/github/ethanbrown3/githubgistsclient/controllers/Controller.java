@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 import java.net.URI;
 import java.net.URL;
@@ -25,11 +26,13 @@ public class Controller implements Initializable {
     private Button submitButton;
     @FXML
     private TextArea outputArea;
+    @FXML
+    private TextField userField;
 
     @FXML
     void handleSubmit(ActionEvent event) {
         // https://api.github.com/users/:username
-        var uri = baseUrl + "/users/ethanbrown3";
+        var uri = baseUrl + "/users/" + userField.getText();
         var usersUrl = URI.create(uri);
         try {
             doGet(usersUrl);
@@ -47,11 +50,12 @@ public class Controller implements Initializable {
         // send() is a blocking synchronous call
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        if (response.statusCode() == 200) {
+        int statusCode = response.statusCode();
+        if (statusCode == 200) {
             GithubUser user = gson.fromJson(response.body(), GithubUser.class);
             outputArea.setText(response.toString() + "\n" + user.toString());
-        } else {
-            outputArea.setText(response.toString());
+        } else if (statusCode == 404) {
+            outputArea.setText("User not found");
         }
     }
 
