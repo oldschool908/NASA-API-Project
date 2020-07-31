@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import org.w3c.dom.Text;
 
 import java.net.URI;
 import java.net.URL;
@@ -18,15 +19,15 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ResourceBundle;
 
-public class PublicUserController implements Initializable {
+public class UserController implements Initializable {
     private String githubApiKey = System.getenv("GITHUB_API_KEY");
     private HttpClient client;
     private String baseUrl = "https://api.github.com";
 
     @FXML
-    private Button submitButton;
-    @FXML
     private TextField userField;
+    @FXML
+    private TextField githubTokenField;
     @FXML
     private Label usernameLabel;
     @FXML
@@ -34,9 +35,11 @@ public class PublicUserController implements Initializable {
     @FXML
     private Label companyLabel;
     @FXML
-    private Label repoCountLabel;
+    private Label publicRepoCountLabel;
     @FXML
     private Label locationLabel;
+    @FXML
+    private Label privateRepoCountLabel;
 
     @FXML
     void handleSubmit(ActionEvent event) {
@@ -53,9 +56,12 @@ public class PublicUserController implements Initializable {
     void doGet(URI uri) throws Exception {
         // the default builder http method is GET so calling
         // .GET() on the builder is not necessary
-        var request = HttpRequest.newBuilder(uri)
-                .header("Accept", "application/json")
-                .build();
+        var requestBuilder = HttpRequest.newBuilder(uri)
+                .header("Accept", "application/json");
+        if (githubTokenField.getText().length() > 0) {
+            requestBuilder.header("Authorization", "token " + githubTokenField.getText());
+        }
+        var request = requestBuilder.build();
         // send() is a blocking synchronous call
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -72,11 +78,12 @@ public class PublicUserController implements Initializable {
     }
 
     void displayUserData(GithubUser user) {
-        usernameLabel.setText(user.getLogin());
-        bioLabel.setText(user.getBio());
-        companyLabel.setText(user.getCompany());
-        locationLabel.setText(user.getLocation());
-        repoCountLabel.setText(user.getPublicRepos().toString());
+        usernameLabel.setText(user.login);
+        bioLabel.setText(user.bio);
+        companyLabel.setText(user.company);
+        locationLabel.setText(user.location);
+        publicRepoCountLabel.setText(user.public_repos.toString());
+        privateRepoCountLabel.setText(user.total_private_repos == null ? "" : user.total_private_repos.toString());
     }
 
     void clearUserData() {
@@ -84,7 +91,8 @@ public class PublicUserController implements Initializable {
         bioLabel.setText("");
         companyLabel.setText("");
         locationLabel.setText("");
-        repoCountLabel.setText("");
+        publicRepoCountLabel.setText("");
+        privateRepoCountLabel.setText("");
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
