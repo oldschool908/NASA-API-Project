@@ -1,5 +1,6 @@
 package com.github.ethanbrown3.githubgistsclient.controllers;
 
+import com.github.ethanbrown3.githubgistsclient.clients.HttpClientWrapper;
 import com.github.ethanbrown3.githubgistsclient.models.GithubUser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,11 +18,12 @@ import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UserController implements Initializable {
     private String githubApiKey = System.getenv("GITHUB_API_KEY");
-    private HttpClient client;
+    private HttpClientWrapper client;
     private String baseUrl = "https://api.github.com";
 
     @FXML
@@ -56,14 +58,16 @@ public class UserController implements Initializable {
     void doGet(URI uri) throws Exception {
         // the default builder http method is GET so calling
         // .GET() on the builder is not necessary
-        var requestBuilder = HttpRequest.newBuilder(uri)
-                .header("Accept", "application/json");
-        if (githubTokenField.getText().length() > 0) {
-            requestBuilder.header("Authorization", "token " + githubTokenField.getText());
-        }
-        var request = requestBuilder.build();
+        var headers = new ArrayList<String>() {{
+            add("Accept");
+            add("application/json");
+            if (githubTokenField.getText().length() > 0) {
+                add("Authorization");
+                add("token " + githubTokenField.getText());
+            }
+        }};
         // send() is a blocking synchronous call
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = client.get(uri, headers);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         int statusCode = response.statusCode();
         if (statusCode == 200) {
@@ -74,6 +78,10 @@ public class UserController implements Initializable {
             clearUserData();
             usernameLabel.setText("User not found");
             System.out.println("User not found");
+        } else if (statusCode == 401) {
+            clearUserData();
+            usernameLabel.setText("Bad Github Token");
+            System.out.println(response.body());
         }
     }
 
@@ -96,6 +104,6 @@ public class UserController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        client = HttpClient.newHttpClient();
+        client = new HttpClientWrapper();
     }
 }
