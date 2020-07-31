@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+        <?import javafx.scene.control.*?>
+        <?import javafx.scene.layout.*?>
+
+        <?import javafx.scene.text.Font?>
+        <?import javafx.geometry.Insets?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.github.ethanbrown3.githubgistsclient.controllers.Controller">
+    <children>
+        <HBox>
+            <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit"></Button>
+            <TextArea fx:id="outputArea"></TextArea>
+        </HBox>
+    </children>
+</AnchorPane>
