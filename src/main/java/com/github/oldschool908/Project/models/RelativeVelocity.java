@@ -1,16 +1,17 @@
 package com.github.oldschool908.Project.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RelativeVelocity {
-    private ArrayList<MPH> relative_velocity;
+    private String miles_per_hour;
 
-    public ArrayList<MPH> getRelative_velocity() {
-        return relative_velocity;
+    public String getMiles_per_hour() {
+        return miles_per_hour;
     }
 
     @Override
     public String toString() {
-        return " "  + relative_velocity ;
+        return " "  + miles_per_hour ;
     }
 }

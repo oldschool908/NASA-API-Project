@@ -12,9 +12,9 @@
             <fx:include fx:id="APODTab" source="APODTab.fxml" />
         </content>
     </Tab>
-    <Tab text="EarthImages" closable="false">
+    <Tab text="Neo Feed" closable="false">
         <content>
-            <fx:include fx:id="EITab" source="EarthImages.fxml" />
+            <fx:include fx:id="EITab" source="NeoFeedTab.fxml" />
         </content>
     </Tab>
 </TabPane>

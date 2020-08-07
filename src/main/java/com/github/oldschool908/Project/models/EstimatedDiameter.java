@@ -9,7 +9,7 @@ public class EstimatedDiameter {
 
     @Override
     public String toString() {
-        return " " +
+        return "" +
                  feet;
     }
 }

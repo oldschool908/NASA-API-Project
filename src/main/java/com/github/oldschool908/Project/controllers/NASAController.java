@@ -106,17 +106,7 @@ public class NASAController implements Initializable {
                 List<ArrayList<MeteorFeed>> meteors = nearEarthObjects.keySet().stream()
                         .map(key->nearEarthObjects.get(key))
                         .collect(Collectors.toList());
-                meteors.stream().forEach(System.out::println);
-//                Display.appendText(meteors.getId());
-//                Display.appendText(meteors.getName());
-//                Display.appendText(meteors.getAbsolut_magnitude_h());
-//                Display.appendText(meteors.getEstimated_diameterFeet());
-//                Display.appendText(meteors.getHazardous());
-//                Display.appendText(meteors.getCloseApproachDate());
-//                Display.appendText(meteors.getRelativeVelocityMPH());
-//                Display.appendText(meteors.getMissDistanceMiles());
-//                Image imageEI = new Image(meteors.getNasa_jpl_url());
-//                imageViewEI.setImage(imageEI);
+                Display.setText(meteors.toString());
             }
 
         } catch (IOException e) {

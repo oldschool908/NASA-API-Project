@@ -52,15 +52,12 @@ public class MeteorFeed {
 
     @Override
     public String toString() {
-        return "MeteorFeed" + '\n' +
-                "id= " + id + '\n' +
-                "name= " + name + '\n' +
-                "nasa_jpl_url= " + nasa_jpl_url + '\n' +
-                "absolut_magnitude_h= " + absolute_magnitude_h+ '\n'  +
-                "estimated_diameter= " + estimated_diameter+ '\n'  +
-                "hazardous= " + hazardous+ '\n'  +
-                "closeApproachDate= " + close_approach_data + '\n' +
-                "relativeVelocityMPH= " + relativeVelocityMPH+ '\n' +
-                "missDistanceMiles= " + missDistanceMiles + '\n';
+        return "ID: " + id + '\n' +
+                "Name: " + name + '\n' +
+                "URL: " + nasa_jpl_url + '\n' +
+                "Absolute Magnitude: " + absolute_magnitude_h+ '\n'  +
+                "" + estimated_diameter+ '\n'  +
+                "Hazardous: " + hazardous+ '\n'  +
+                "Close Approach Data:\n" + close_approach_data;
     }
 }

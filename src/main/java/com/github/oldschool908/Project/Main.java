@@ -16,7 +16,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
 
         primaryStage.setTitle("NASA Client");
-        primaryStage.setScene(new Scene(root, 800, 500));
+        primaryStage.setScene(new Scene(root, 700, 500));
         primaryStage.show();
     }
 

@@ -1,16 +1,14 @@
 package com.github.oldschool908.Project.models;
 
 public class MissDistance {
-    private MissDistanceMiles miss_distance;
+    private String miles;
 
-    public MissDistanceMiles getMiles() {
-        return miss_distance;
+    public String getMiles() {
+        return miles;
     }
 
     @Override
     public String toString() {
-        return "MissDistance{" +
-                "miss_distance=" + miss_distance +
-                '}';
+        return "" + miles;
     }
 }

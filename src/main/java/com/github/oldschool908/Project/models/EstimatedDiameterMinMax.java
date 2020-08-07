@@ -14,8 +14,8 @@ public class EstimatedDiameterMinMax {
 
     @Override
     public String toString() {
-        return "estimated diameter min = " + estimated_diameter_min +" ft"+
-                ", estimated diameter max = " + estimated_diameter_max +" ft"
+        return "Estimated Diameter Min = " + estimated_diameter_min +"ft"+ "\n"
+                + "Estimated Diameter Max = " + estimated_diameter_max +"ft"
                 ;
     }
 }
