@@ -1,4 +1,4 @@
-package com.github.ethanbrown3.githubgistsclient;
+package com.github.oldschool908.Project;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +15,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
 
-        primaryStage.setTitle("Github Gists Client");
-        primaryStage.setScene(new Scene(root, 600, 275));
+        primaryStage.setTitle("NASA Client");
+        primaryStage.setScene(new Scene(root, 800, 500));
         primaryStage.show();
     }
 
