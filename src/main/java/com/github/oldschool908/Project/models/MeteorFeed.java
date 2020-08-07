@@ -1,7 +1,5 @@
 package com.github.oldschool908.Project.models;
 
-import com.github.oldschool908.Project.models.ApproachData.CloseApproachData;
-
 import java.util.ArrayList;
 
 public class MeteorFeed {

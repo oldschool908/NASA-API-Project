@@ -1,4 +1,4 @@
-package com.github.oldschool908.Project.models.ApproachData;
+package com.github.oldschool908.Project.models;
 
 public class CloseApproachData {
     private String close_approach_date;

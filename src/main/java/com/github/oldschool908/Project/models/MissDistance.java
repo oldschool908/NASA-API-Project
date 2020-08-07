@@ -1,4 +1,4 @@
-package com.github.oldschool908.Project.models.ApproachData;
+package com.github.oldschool908.Project.models;
 
 public class MissDistance {
     private MissDistanceMiles miss_distance;
